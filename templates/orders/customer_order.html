@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Ayanna Yoghurt - Indulge in Delightful Opulence</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e13661;
+            --secondary-color: #c1246b;
+            --accent-color: #a72881;
+            --light-bg: #ffffff;
+            --light-text: #333333;
+            --light-text-muted: #6c757d;
+            --light-card: #f8f9fa;
+            --light-border: #dee2e6;
+            --dark-bg: #121212;
+            --dark-text: #f8f9fa;
+            --dark-text-muted: #adb5bd;
+            --dark-card: #1e1e1e;
+            --dark-card-light: #2d2d2d;
+            --dark-border: #444444;
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        body {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        /* Text Colors */
+        .text-muted {
+            color: var(--light-text-muted) !important;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .text-muted {
+            color: var(--dark-text-muted) !important;
+        }
+
+        /* Brand Header */
+        .brand-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards */
+        .yoghurt-card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(255, 75, 75, 0.1);
+            margin-bottom: 1rem;
+            background-color: var(--light-card);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .yoghurt-card {
+            background-color: var(--dark-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .order-summary {
+            background: var(--light-card);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            border: 1px solid var(--light-border);
+        }
+
+        body.dark-mode .order-summary {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        /* Card Headers */
+        .card-header {
+            transition: var(--transition);
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        body.dark-mode .card-header {
+            background-color: var(--dark-card-light) !important;
+            border-bottom-color: var(--dark-border);
+            color: var(--dark-text) !important;
+        }
+
+        /* Form Elements */
+        .form-control, .form-select {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            border-color: var(--light-border);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .form-control, 
+        body.dark-mode .form-select {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+            border-color: var(--dark-border);
+        }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(225, 54, 97, 0.25);
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+
+        body.dark-mode .form-control:focus,
+        body.dark-mode .form-select:focus {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+        }
+
+        .form-label {
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .form-label {
+            color: var(--dark-text);
+        }
+
+        /* Success Modal Styles */
+        .success-modal {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(235, 25, 140, 0.3);
+        }
+
+        .success-modal .modal-header {
+            border-radius: 15px 15px 0 0;
+            padding: 2rem 1rem;
+        }
+
+        .success-modal .modal-body {
+            padding: 2rem;
+        }
+
+        .success-modal .modal-footer {
+            padding: 1.5rem;
+        }
+
+        .order-details {
+            border-left: 4px solid var(--accent-color);
+            background-color: rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            color: var(--light-text);
+        }
+
+        body.dark-mode .order-details {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--dark-text);
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-success {
+            padding: 12px 24px;
+            font-weight: 600;
+        }
+
+        .btn-outline-danger {
+            border-color: #dc3545;
+            color: #dc3545;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .btn-outline-danger {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .toggle-btn {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        body.dark-mode .footer {
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 3rem 0;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: var(--light-card);
+            transition: var(--transition);
+            color: var(--light-text);
+        }
+
+        body.dark-mode .testimonial-card {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+        }
+
+        /* Flavor Cards */
+        .flavor-card {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background-color: var(--light-card);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--light-border);
+            color: var(--light-text);
+        }
+
+        body.dark-mode .flavor-card {
+            background-color: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+
+        .flavor-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .flavor-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* FIX: Order Items List - Make text visible in dark mode */
+        #items-list {
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        body.dark-mode #items-list {
+            color: var(--dark-text);
+        }
+
+        #items-list .border-bottom {
+            border-bottom-color: var(--light-border) !important;
+            transition: var(--transition);
+        }
+
+        body.dark-mode #items-list .border-bottom {
+            border-bottom-color: var(--dark-border) !important;
+        }
+
+        #items-list strong {
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        body.dark-mode #items-list strong {
+            color: var(--dark-text);
+        }
+
+        #items-list small {
+            color: var(--light-text-muted) !important;
+            transition: var(--transition);
+        }
+
+        body.dark-mode #items-list small {
+            color: var(--dark-text-muted) !important;
+        }
+
+        /* FIX: Summary items */
+        #summary-items {
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        body.dark-mode #summary-items {
+            color: var(--dark-text);
+        }
+
+        #summary-items .text-muted {
+            color: var(--light-text-muted) !important;
+            transition: var(--transition);
+        }
+
+        body.dark-mode #summary-items .text-muted {
+            color: var(--dark-text-muted) !important;
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .modal-content {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+        }
+
+        .modal-header {
+            border-bottom-color: var(--light-border);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .modal-header {
+            border-bottom-color: var(--dark-border);
+        }
+
+        .modal-footer {
+            border-top-color: var(--light-border);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .modal-footer {
+            border-top-color: var(--dark-border);
+        }
+
+        /* Text colors for dark mode */
+        body.dark-mode .text-dark {
+            color: var(--dark-text) !important;
+        }
+
+        body.dark-mode .bg-light {
+            background-color: var(--dark-card) !important;
+        }
+
+        body.dark-mode .border-bottom {
+            border-bottom-color: var(--dark-border) !important;
+        }
+
+        /* HR elements */
+        hr {
+            border-color: var(--light-border);
+            transition: var(--transition);
+        }
+
+        body.dark-mode hr {
+            border-color: var(--dark-border);
+        }
+
+        /* Ensure all text is visible in dark mode */
+        body.dark-mode small,
+        body.dark-mode .small {
+            color: var(--dark-text-muted) !important;
+        }
+
+        body.dark-mode .text-primary {
+            color: #6ea8fe !important;
+        }
+
+        body.dark-mode .text-success {
+            color: #75b798 !important;
+        }
+
+        body.dark-mode .text-warning {
+            color: #ffda6a !important;
+        }
+
+        body.dark-mode .text-info {
+            color: #6edff6 !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dark-mode-toggle {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .toggle-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .brand-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <button class="toggle-btn" id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Header -->
+    <div class="brand-header text-center">
+        <div class="container">
+            <h1 class="display-4">
+                
+                Ayanna Yoghurt</h1>
+            <p class="lead">Indulge in Delightful Opulence</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- About Section -->
+        <div class="about-section">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Made with Love</h4>
+                    <p class="text-muted">Our yogurts are crafted with the finest ingredients and a whole lot of love.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>100% Natural</h4>
+                    <p class="text-muted">No artificial flavors or preservatives. Just pure, natural goodness.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h4>Fast Delivery</h4>
+                    <p class="text-muted">Fresh yogurt delivered fast.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Form -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card yoghurt-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">order here</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Yogurt Selection Form -->
+                        <div class="row g-3" id="yogurt-form">
+                            <div class="col-md-4">
+                                <label class="form-label">Size</label>
+                                <select class="form-select size-select">
+                                    <option value="250ml">250ml - KSh 50</option>
+                                    <option value="500ml">500ml - KSh 100</option>
+                                    <option value="1L">1L - KSh 200</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Flavor</label>
+                                <select class="form-select flavor-select">
+                                    <option value="Mango">Mango</option>
+                                    <option value="Pineapple">Pineapple</option>
+                                    <option value="Strawberry">Strawberry</option>
+                                    <option value="Raspberry">Raspberry</option> 
+                                    <option value="cocktail">Cocktail (Mixed Flavors)</option>
+                                    <option value="Blueberry">Blueberry</option>
+                                    <option value="Passion">Passion</option>
+                                    <option value="Vanilla">Vanilla</option>
+                                    <option value="lemon">Lemon</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" class="form-control quantity-input" min="1" value="1">
+                            </div>
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="button" class="btn btn-success btn-add" onclick="addYogurt()">add</button>
+                            </div>
+                        </div>
+
+                        <!-- Order Items List -->
+                        <div class="mt-4" id="order-items">
+                            <h6>Your Selections:</h6>
+                            <div id="items-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Information -->
+                <div class="card yoghurt-card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Delivery Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="customer-name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone-number" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Delivery Address *</label>
+                                <textarea class="form-control" id="location" rows="3" required></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Preferred Delivery Time *</label>
+                                <select class="form-select" id="delivery-time" required>
+                                    <option value="Morning">Morning (8AM - 12PM)</option>
+                                    <option value="Afternoon">Afternoon (12PM - 5PM)</option>
+                                    <option value="Evening">Evening (5PM - 8PM)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="card yoghurt-card mt-4">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0">What Our Customers Say</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="testimonial-card">
+                            <p>"The best yogurt I've ever tasted So creamy and the flavors are amazing. Delivery was super fast too thankyou linet"</p>
+                            <div class="d-flex align-items-center">
+                                <div class="fw-bold">Allan K.</div>
+                                <div class="ms-auto text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p>"I order Ayanna Yogurt every week for my family. The kids love the strawberry flavor and I'm hooked on the passion fruit!"</p>
+                            <div class="d-flex align-items-center">
+                                <div class="fw-bold">Michael T.</div>
+                                <div class="ms-auto text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="order-summary sticky-top" style="top: 20px;">
+                    <h5 class="mb-3">Order Summary</h5>
+                    <div id="summary-items"></div>
+                    
+                    <!-- Order Button -->
+                    <div class="d-grid gap-2 mt-3">
+                        <button type="button" class="btn btn-primary btn-lg" id="order-button" onclick="submitOrder()">
+                            🥛 Place Order
+                        </button>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p class="text-muted small mb-1">💵 Payment: pay on Delivery</p>
+                        <p class="text-muted small mb-0">Best natural yoghurt 🍨</p>
+                    </div>
+
+                    <!-- Popular Flavors -->
+                    <div class="mt-4">
+                        <h6>Popular Flavors</h6>
+                        <div class="row">
+                            <div class="col-6 mb-2">
+                                <div class="flavor-card" onclick="selectFlavor('Mango')">
+                                    <div class="flavor-icon">🥭</div>
+                                    <div>Mango</div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="flavor-card" onclick="selectFlavor('Strawberry')">
+                                    <div class="flavor-icon">🍓</div>
+                                    <div>Strawberry</div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="flavor-card" onclick="selectFlavor('Vanilla')">
+                                    <div class="flavor-icon">🍦</div>
+                                    <div>Vanilla</div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="flavor-card" onclick="selectFlavor('cocktail')">
+                                    <div class="flavor-icon">🍹</div>
+                                    <div>Cocktail</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Ayanna Yoghurt</h5>
+                    <p>Indulge in delightful opulence with our premium, natural yogurts.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="fas fa-phone me-2"></i> +254740947593</p>
+                    <p><i class="fas fa-envelope me-2"></i> Ayannayoghurt@gmail.com</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex gap-3">
+                        <a href="https://www.instagram.com/ayanna.yoghurt?igsh=MTB3N3Ewc215ZG01NA==" class="text-white"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="https://www.instagram.com/ayanna.yoghurt?igsh=MTB3N3Ewc215ZG01NA==" class="text-white"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="https://www.instagram.com/ayanna.yoghurt?igsh=MTB3N3Ewc215ZG01NA==" class="text-white"><i class="fab fa-twitter fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2023 Ayanna Yoghurt.created by biggztec.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Popup Only -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content success-modal">
+                <!-- Header -->
+                <div class="modal-header text-center" style="background: linear-gradient(135deg, #eb37af, #e27196); border: none;">
+                    <div class="w-100 text-white">
+                        <div class="mb-3">
+                            <div style="font-size: 4rem;">✅</div>
+                        </div>
+                        <h4 class="modal-title w-100" id="successModalLabel">Order Confirmed! 🎉</h4>
+                    </div>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body text-center py-4">
+                    <h5 class="text-success mb-3">Thank you for your order 😚</h5>
+                    <p class="mb-3">Your delicious yogurt is being prepared.meanwhile follow us.</p>
+                    
+                    <div class="order-details rounded p-3 mb-4">
+                        <p class="mb-2"><strong>Order ID:</strong> <span id="modal-order-id" class="text-primary">#</span></p>
+                        <p class="mb-2"><strong>Estimated Delivery:</strong> Within 2 hours</p>
+                        <p class="mb-0"><strong>Payment:</strong> Cash on Delivery</p>
+                    </div>
+                    
+                    <div class="delivery-info">
+                        <p class="small text-muted mb-3">
+                            📞 Linet will call you to confirm delivery details<br>
+                            🕒 Keep your phone nearby
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer justify-content-center border-0">
+                    <button type="button" class="btn btn-success btn-lg px-4" onclick="resetFormAndClose()">
+                        🥛 Place Another Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            enableDarkMode();
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            darkModeToggle.style.background = 'linear-gradient(135deg, #ffd43b, #fcc419)';
+        }
+
+        function disableDarkMode() {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            darkModeToggle.style.background = 'var(--primary-color)';
+        }
+
+        // Order Management
+        let orderItems = [];
+        const prices = { '250ml': 50, '500ml': 100, '1L': 200 };
+        let isSubmitting = false;
+
+        function addYogurt() {
+            const size = document.querySelector('.size-select').value;
+            const flavor = document.querySelector('.flavor-select').value;
+            const quantity = parseInt(document.querySelector('.quantity-input').value);
+
+            if (quantity < 1) return;
+
+            const item = { size, flavor, quantity };
+            orderItems.push(item);
+            updateOrderDisplay();
+        }
+
+        function removeYogurt(index) {
+            orderItems.splice(index, 1);
+            updateOrderDisplay();
+        }
+
+        function updateOrderDisplay() {
+            const itemsList = document.getElementById('items-list');
+            const summaryItems = document.getElementById('summary-items');
+            
+            itemsList.innerHTML = '';
+            summaryItems.innerHTML = '';
+
+            let total = 0;
+
+            orderItems.forEach((item, index) => {
+                const itemTotal = prices[item.size] * item.quantity;
+                total += itemTotal;
+
+                // Items list
+                itemsList.innerHTML += `
+                    <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                        <div>
+                            <strong>${item.quantity}x ${item.size} ${item.flavor}</strong>
+                            <br><small class="text-muted">KSh ${prices[item.size]} each</small>
+                        </div>
+                        <div>
+                            <strong>KSh ${itemTotal}</strong>
+                            <button class="btn btn-sm btn-outline-danger ms-2" onclick="removeYogurt(${index})">×</button>
+                        </div>
+                    </div>
+                `;
+
+                // Summary items
+                summaryItems.innerHTML += `
+                    <div class="d-flex justify-content-between">
+                        <span>${item.quantity}x ${item.size} ${item.flavor}</span>
+                        <span>KSh ${itemTotal}</span>
+                    </div>
+                `;
+            });
+
+            if (orderItems.length > 0) {
+                summaryItems.innerHTML += `
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total:</span>
+                        <span>KSh ${total}</span>
+                    </div>
+                `;
+            } else {
+                summaryItems.innerHTML = '<p class="text-muted">No items added yet</p>';
+            }
+        }
+
+        function selectFlavor(flavor) {
+            document.querySelector('.flavor-select').value = flavor;
+        }
+
+        // Submit order via AJAX
+        async function submitOrder() {
+            // Prevent multiple submissions
+            if (isSubmitting) return;
+            
+            const customerName = document.getElementById('customer-name').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const location = document.getElementById('location').value;
+            const deliveryTime = document.getElementById('delivery-time').value;
+
+            if (!customerName || !phoneNumber || !location || orderItems.length === 0) {
+                alert('Please fill in all required fields and add at least one yogurt item.');
+                return;
+            }
+
+            // Set submitting state
+            isSubmitting = true;
+            const orderButton = document.getElementById('order-button');
+            orderButton.disabled = true;
+            orderButton.innerHTML = 'Placing Order...';
+
+            // Prepare order data
+            const orderData = {
+                customer_name: customerName,
+                phone_number: phoneNumber,
+                location: location,
+                delivery_time: deliveryTime,
+                order_items: orderItems
+            };
+
+            console.log("Submitting order:", orderData);
+            
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const result = await response.json();
+                
+                // Reset button state
+                isSubmitting = false;
+                orderButton.disabled = false;
+                orderButton.innerHTML = '🥛 Place Order';
+                
+                if (result.success) {
+                    // Show success popup with order ID
+                    showSuccessModal(result.order_id);
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                // Reset button state on error
+                isSubmitting = false;
+                orderButton.disabled = false;
+                orderButton.innerHTML = '🥛 Place Order';
+                
+                console.error('Network error:', error);
+                alert('Network error. Please try again.');
+            }
+        }
+
+        // Function to show success popup
+        function showSuccessModal(orderId) {
+            // Set order ID in popup
+            document.getElementById('modal-order-id').textContent = '#' + orderId;
+            
+            // Show success popup
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Reset form automatically after showing success
+            resetForm();
+        }
+
+        function resetFormAndClose() {
+            // Reset form
+            resetForm();
+            
+            // Close popup
+            const successModal = bootstrap.Modal.getInstance(document.getElementById('successModal'));
+            if (successModal) {
+                successModal.hide();
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Reset form function
+        function resetForm() {
+            orderItems = [];
+            document.getElementById('customer-name').value = '';
+            document.getElementById('phone-number').value = '';
+            document.getElementById('location').value = '';
+            document.querySelector('.quantity-input').value = '1';
+            updateOrderDisplay();
+        }
+
+        // CSRF token function
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Initialize display
+        updateOrderDisplay();
+    </script>
+</body>
+</html>

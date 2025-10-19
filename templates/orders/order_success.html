@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card yoghurt-card">
+                <div class="card-header bg-success text-white text-center">
+                    <h4>✅ Order Placed Successfully!</h4>
+                </div>
+                <div class="card-body text-center">
+                    <h5>Thank you, {{ customer_name }}!</h5>
+                    <p>Your order has been received.</p>
+                    <div class="alert alert-info">
+                        <strong>Order ID: #{{ order_id }}</strong>
+                    </div>
+                    
+                    {% if order %}
+                    <h6 class="mt-4">Order Details:</h6>
+                    {% for item in order.order_details %}
+                    <div class="d-flex justify-content-between">
+                        <span>{{ item.quantity }}x {{ item.size }} {{ item.flavor }}</span>
+                        <span>KSh 
+                            {% if item.size == '250ml' %}{{ 50|add:0|multiply:item.quantity }}
+                            {% elif item.size == '500ml' %}{{ 100|add:0|multiply:item.quantity }}
+                            {% elif item.size == '1L' %}{{ 200|add:0|multiply:item.quantity }}
+                            {% endif %}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total Amount:</span>
+                        <span>KSh {{ order.total_amount }}</span>
+                    </div>
+                    
+                    <div class="mt-4 text-muted small">
+                        <p>📞 We'll contact you at <strong>{{ order.phone_number }}</strong></p>
+                        <p>📍 Delivery to: {{ order.location }}</p>
+                        <p>⏰ Preferred time: {{ order.delivery_time }}</p>
+                        <p>💵 Payment: Cash on Delivery</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="/" class="btn btn-primary">Place Another Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
