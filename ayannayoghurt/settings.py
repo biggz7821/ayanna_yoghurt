@@ -15,13 +15,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# ✅ ADD THIS - CSRF TRUSTED ORIGINS (FIXES THE ERROR)
+# ✅ CRITICAL: Use your CURRENT domain until you change it
 CSRF_TRUSTED_ORIGINS = [
-    'https://ayannayoghurt.onrender.com',
+    'https://ayanna-yoghurt-1.onrender.com',  # ← YOUR CURRENT DOMAIN
+    'https://ayannayoghurt.onrender.com',     # ← YOUR DESIRED DOMAIN
     'https://*.onrender.com',
 ]
 
-# ✅ ADD THESE SECURITY SETTINGS
+# ✅ SECURITY SETTINGS
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'Lax'
