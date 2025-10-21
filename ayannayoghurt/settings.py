@@ -2,6 +2,7 @@
 Django settings for ayannayoghurt project.
 """
 import os
+import dj_database_url  # ✅ ADD THIS IMPORT
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +28,14 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SAMESITE = 'Lax'
+
+# ✅ POSTGRESQL DATABASE - FIXES DATA LOSS
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://ayanna_db_user:Ym4z2MAaS9NBylqXhyZQ3XiEjHax0W51@dpg-d3qkinqli9vc73cesjpg-a/ayanna_db',
+        conn_max_age=600
+    )
+}
 
 # Application definition
 INSTALLED_APPS = [
@@ -67,14 +76,6 @@ TEMPLATES = [
         },
     },
 ]
-
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
