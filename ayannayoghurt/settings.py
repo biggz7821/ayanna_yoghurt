@@ -10,23 +10,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ayanna-yoghurt-secret-key-2024'
 DEBUG = True
 
-# Your domain
 ALLOWED_HOSTS = [
     'ayannayoghurt.onrender.com',
     'localhost',
     '127.0.0.1',
 ]
 
-# CSRF for your domain
 CSRF_TRUSTED_ORIGINS = [
     'https://ayannayoghurt.onrender.com',
     'https://*.onrender.com',
 ]
 
-# ✅ YOUR POSTGRESQL DATABASE
+# ✅ NEW DATABASE URL
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://ayanna_db_user:Ym4z2MAaS9NBylqXhyZQ3XiEjHax0W51@dpg-d3qkinqli9vc73cesjpg-a/ayanna_db',
+        default='postgresql://ayannayoghurt_db_user:AgmKfVn5EgENCRN6BGvtnQcZX3tlYVaI@dpg-d40944n5r7bs73a9fvlg-a.oregon-postgres.render.com/ayannayoghurt_db',
         conn_max_age=600
     )
 }
