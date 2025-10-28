@@ -2,20 +2,35 @@
 Django settings for ayannayoghurt project.
 """
 import os
+import dj_database_url
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-ayanna-yoghurt-secret-key-2024'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ✅ UPDATED FOR YOUR NEW DOMAIN
+ALLOWED_HOSTS = [
+    'ayannayoghurt.onrender.com',  # ← YOUR NEW DOMAIN
+    'localhost',
+    '127.0.0.1',
+]
 
-# Application definition
+# ✅ UPDATED CSRF FOR YOUR NEW DOMAIN
+CSRF_TRUSTED_ORIGINS = [
+    'https://ayannayoghurt.onrender.com',  # ← YOUR NEW DOMAIN
+    'https://*.onrender.com',
+]
+
+# ✅ POSTGRESQL DATABASE (PERSISTS DATA)
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://ayanna_db_user:Ym4z2MAaS9NBylqXhyZQ3XiEjHax0W51@dpg-d3qkinqli9vc73cesjpg-a/ayanna_db',
+        conn_max_age=600
+    )
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,21 +70,8 @@ TEMPLATES = [
     },
 ]
 
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# Time zone
 TIME_ZONE = 'Africa/Nairobi'
 USE_TZ = True
-
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
