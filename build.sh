@@ -3,28 +3,24 @@ set -o errexit
 
 pip install -r requirements.txt
 python manage.py collectstatic --no-input
+python manage.py migrate
 
-# Force PostgreSQL migrations
-python manage.py migrate --database=default
-python check_db.py
-# Create admin in PostgreSQL
+# Create admin in NEW database
 python manage.py shell -c "
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'ayannayoghurt.settings'
-import django
-django.setup()
-
 from django.contrib.auth.models import User
-from django.db import connections
+from django.db import connection
 
-# Check which database we're using
-db_engine = connections['default'].settings_dict['ENGINE']
-print(f'Using database: {db_engine}')
+print('🆕 FRESH DATABASE SETUP')
+print('📊 Database:', connection.settings_dict['NAME'])
+print('🔧 Engine:', connection.settings_dict['ENGINE'])
 
-# Create admin
-User.objects.filter(username='admin').delete()
-User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'admin')
-print('✅ ADMIN CREATED IN POSTGRESQL')
+# Create admin user
+User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'admin123')
+
+print('✅ ADMIN USER CREATED SUCCESSFULLY!')
+print('🌐 Login: https://ayannayoghurt.onrender.com/admin/')
 print('👤 Username: admin')
-print('🔑 Password: admin')
+print('🔑 Password: admin123')
+print('')
+print('🎉 YOUR ADMIN IS READY!')
 "
