@@ -1,14 +1,20 @@
 """
-Django settings for ayannayoghurt project.
+Django settings for Ayanna Yoghurt Project
 """
 import os
 import dj_database_url
 from pathlib import Path
 
+# --------------------------------------------------
+# BASE SETTINGS
+# --------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-ayanna-yoghurt-secret-key-2024'
-DEBUG = True
+# SECURITY WARNING: keep the secret key secret!
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-for-local-use')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     'ayannayoghurt.onrender.com',
@@ -21,14 +27,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.onrender.com',
 ]
 
-# ✅ NEW DATABASE URL
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://ayannayoghurt_db_user:AgmKfVn5EgENCRN6BGvtnQcZX3tlYVaI@dpg-d40944n5r7bs73a9fvlg-a.oregon-postgres.render.com/ayannayoghurt_db',
-        conn_max_age=600
-    )
-}
-
+# --------------------------------------------------
+# APPLICATIONS
+# --------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,8 +69,48 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = 'ayannayoghurt.wsgi.application'
+
+# --------------------------------------------------
+# DATABASE CONFIGURATION
+# --------------------------------------------------
+# Uses PostgreSQL on Render or SQLite locally
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL') or f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
+
+# --------------------------------------------------
+# PASSWORD VALIDATION
+# --------------------------------------------------
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+]
+
+# --------------------------------------------------
+# INTERNATIONALIZATION
+# --------------------------------------------------
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'Africa/Nairobi'
+USE_I18N = True
+USE_TZ = True
+
+# --------------------------------------------------
+# STATIC FILES
+# --------------------------------------------------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-TIME_ZONE = 'Africa/Nairobi'
-USE_TZ = True
+
+# WhiteNoise for serving static files on Render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# --------------------------------------------------
+# DEFAULT PRIMARY KEY FIELD TYPE
+# --------------------------------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
