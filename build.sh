@@ -6,7 +6,7 @@ python manage.py collectstatic --no-input
 
 # Force PostgreSQL migrations
 python manage.py migrate --database=default
-
+python check_db.py
 # Create admin in PostgreSQL
 python manage.py shell -c "
 import os
