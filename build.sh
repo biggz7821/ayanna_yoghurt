@@ -1,23 +1,17 @@
 #!/usr/bin/env bash
-# Exit on error
 set -o errexit
 
-# Install dependencies
 pip install -r requirements.txt
-
-# Collect static files
 python manage.py collectstatic --no-input
-
-# Apply database migrations
 python manage.py migrate
 
-# Create admin user if it doesn't exist
+# Force create admin in PostgreSQL
 python manage.py shell -c "
-from django.contrib.auth import get_user_model
-User = get_user_model()
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'Ayanna2024!')
-    print('✅ ADMIN USER CREATED: username=admin, password=Ayanna2024!')
-else:
-    print('✅ Admin user already exists')
+from django.contrib.auth.models import User
+User.objects.filter(username='admin').delete()  # Remove old admin
+User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'admin123')
+print('✅ ADMIN FORCE CREATED FOR ayannayoghurt.onrender.com')
+print('✅ Login: https://ayannayoghurt.onrender.com/admin/')
+print('✅ Username: admin')
+print('✅ Password: admin123')
 "
