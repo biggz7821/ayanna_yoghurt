@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Exit on error
 set -o errexit
 
 # Install dependencies
@@ -10,7 +11,4 @@ python manage.py collectstatic --no-input
 # Apply database migrations
 python manage.py migrate
 
-# Create superuser
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'admin123')" | python manage.py shell
-
-echo "✅ Admin user created: admin / admin123"
+echo "✅ Build completed successfully — database migrated and static files collected."
