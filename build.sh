@@ -3,16 +3,28 @@ set -o errexit
 
 pip install -r requirements.txt
 python manage.py collectstatic --no-input
-python manage.py migrate
 
-# Create admin with simple password
-python create_admin.py
+# Force PostgreSQL migrations
+python manage.py migrate --database=default
 
-# Double check it was created
+# Create admin in PostgreSQL
 python manage.py shell -c "
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'ayannayoghurt.settings'
+import django
+django.setup()
+
 from django.contrib.auth.models import User
-users = User.objects.all()
-print(f'Total users: {users.count()}')
-for u in users:
-    print(f'User: {u.username} (staff: {u.is_staff}, superuser: {u.is_superuser})')
+from django.db import connections
+
+# Check which database we're using
+db_engine = connections['default'].settings_dict['ENGINE']
+print(f'Using database: {db_engine}')
+
+# Create admin
+User.objects.filter(username='admin').delete()
+User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'admin')
+print('✅ ADMIN CREATED IN POSTGRESQL')
+print('👤 Username: admin')
+print('🔑 Password: admin')
 "
