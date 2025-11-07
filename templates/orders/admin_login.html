@@ -1,30 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-6">
-            <div class="card yoghurt-card">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>🥛 Ayanna Yoghurt Admin</h4>
+<div class="container-fluid admin-login-container">
+    <!-- Animated Background Elements -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
+            <!-- Glass Morphism Card -->
+            <div class="card admin-login-card glass-effect">
+                <!-- Card Header -->
+                <div class="card-header admin-login-header text-center">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            🥛
+                        </div>
+                        <h3 class="brand-name">Ayanna Yoghurt</h3>
+                        <p class="brand-tagline">Admin Portal</p>
+                    </div>
                 </div>
-                <div class="card-body">
+
+                <!-- Card Body -->
+                <div class="card-body admin-login-body">
                     {% if error %}
-                    <div class="alert alert-danger">{{ error }}</div>
+                    <div class="alert alert-danger alert-elegant">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        {{ error }}
+                    </div>
                     {% endif %}
-                    
-                    <form method="post">
+
+                    <!-- Login Form -->
+                    <form method="post" class="login-form">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required>
+                        
+                        <!-- Username Field -->
+                        <div class="form-group-elegant">
+                            <div class="input-wrapper">
+                                <i class="fas fa-user input-icon"></i>
+                                <input type="text" class="form-control input-elegant" 
+                                       name="username" placeholder="Username" required autofocus>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" required>
+
+                        <!-- Password Field -->
+                        <div class="form-group-elegant">
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" class="form-control input-elegant" 
+                                       name="password" placeholder="Password" required>
+                            </div>
                         </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Login</button>
+
+                        <!-- Login Button -->
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn login-btn-elegant">
+                                <span class="btn-text">Sign In</span>
+                                <i class="fas fa-arrow-right btn-icon"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -32,4 +68,218 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Modern Container */
+.admin-login-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Shapes Animation */
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 120px;
+    height: 120px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Glass Morphism Card */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.admin-login-header {
+    background: linear-gradient(135deg, #e13661 0%, #c1246b 100%);
+    border: none;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 2.5rem 1rem;
+    color: white;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.logo-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.brand-tagline {
+    opacity: 0.9;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Card Body */
+.admin-login-body {
+    padding: 2.5rem;
+}
+
+/* Elegant Form Styles */
+.form-group-elegant {
+    margin-bottom: 1.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    z-index: 10;
+}
+
+.input-elegant {
+    padding-left: 45px;
+    padding-right: 15px;
+    height: 50px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.input-elegant:focus {
+    border-color: #e13661;
+    box-shadow: 0 0 0 3px rgba(225, 54, 97, 0.1);
+    background: white;
+}
+
+/* Elegant Login Button */
+.login-btn-elegant {
+    background: linear-gradient(135deg, #e13661 0%, #c1246b 100%);
+    border: none;
+    border-radius: 12px;
+    height: 50px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn-elegant:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(225, 54, 97, 0.3);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+.login-btn-elegant:hover .btn-icon {
+    transform: translateY(-50%) translateX(3px);
+}
+
+/* Elegant Alert */
+.alert-elegant {
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    background: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+    color: #721c24;
+}
+
+/* Dark Mode Support */
+body.dark-mode .glass-effect {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .input-elegant {
+    background: rgba(45, 45, 45, 0.8);
+    border-color: #444;
+    color: #f8f9fa;
+}
+
+body.dark-mode .input-elegant:focus {
+    background: #2d2d2d;
+    border-color: #e13661;
+}
+
+body.dark-mode .input-icon {
+    color: #adb5bd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-login-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    .admin-login-header {
+        padding: 2rem 1rem;
+    }
+}
+</style>
+</script>
 {% endblock %}
