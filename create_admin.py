@@ -1,19 +1,18 @@
-import django
 import os
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ayannayoghurt.settings")
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ayannayoghurt.settings')
 django.setup()
 
 from django.contrib.auth.models import User
 
-# delete existing admin
-User.objects.filter(username="admin").delete()
+# Delete ALL admin users first
+User.objects.filter(username='admin').delete()
 
-# create new admin
-User.objects.create_superuser(
-    username="admin",
-    email="admin@ayannayoghurt.com",
-    password="admin"
-)
+# Create with simple password
+user = User.objects.create_superuser('admin', 'admin@ayannayoghurt.com', 'admin')
+user.save()
 
-print("Admin reset successful!")
+print("🎉 ADMIN USER CREATED!")
+print("📍 https://ayannayoghurt.onrender.com/admin/")
+print("👤 admin")
+print("🔑 admin")
